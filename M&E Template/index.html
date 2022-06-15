@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Portfolio" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="shortcut icon" href="#">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="styles.css" />
+    <title>M&E Controls -: Lough Anna Telemetry</title>
+
+
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-analytics.js";
+      import { getDatabase } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js"
+
+      import { ref, set } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js"
+      import { child, get } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js"
+      import { onValue } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js"
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyB1tN0HlspSo67nxBBl2_9u_EwgIjULDSM",
+        authDomain: "glenties-source-data.firebaseapp.com",
+        databaseURL: "https://glenties-source-data-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "glenties-source-data",
+        storageBucket: "glenties-source-data.appspot.com",
+        messagingSenderId: "772277728311",
+        appId: "1:772277728311:web:1ddc6ac76b8e9c75e2fbb2",
+        measurementId: "G-CZ7TYLGS8T"
+      };
+
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      // Get a reference to the database service
+      const database = getDatabase(app);
+      const db = getDatabase();
+      const dbRef = ref(getDatabase());
+
+
+
+      // Get RTU Count
+      const rtuRef = ref(db, 'Telemetry Data/Comms Status/RTU Count');
+      onValue(rtuRef, (snapshot) => {
+        var rtu_data = snapshot.val();
+        console.log(rtu_data);
+
+        //console.log(snapshot.val()); 
+        //alert("Here is your value: " + data); 
+        document.getElementById("RTU").innerHTML = rtu_data;
+
+      });
+
+      // Get DI_1 Count
+      const i_p1RunRef = ref(db, 'Telemetry Data/Digital Inputs/DI-0 : Pump No1 Run');
+      onValue(i_p1RunRef, (snapshot) => {
+        var i_p1_run_data = snapshot.val();
+
+        //console.log(data);
+        console.log(snapshot.val()); 
+        //alert("Here is your value: " + data); 
+        document.getElementById("I-p1Run").innerHTML = i_p1_run_data;
+
+        //console.log(typeof i_p1_run_data)
+        //console.log(typeof i_p1_run_ref)
+        if (i_p1_run_data == true) {
+          //console.log("Running")
+          document.getElementById("p1_run_status").innerHTML = "Running";
+        } else if (i_p1_run_data == false) {
+          //console.log("Idle")
+          document.getElementById("p1_run_status").innerHTML = "Stopped";
+        } else{
+          //console.log("Wrong data type")
+          document.getElementById("p1_run_status").innerHTML = "Data Loss";
+        }
+
+      });
+
+      // Get DI_1 Count
+      const i_p1TripRef = ref(db, 'Telemetry Data/Digital Inputs/DI-1 : Pump No1 Trip');
+      onValue(i_p1TripRef, (snapshot) => {
+        var i_p1_trip_data = snapshot.val();
+        //console.log(data);
+        console.log(snapshot.val()); 
+        //alert("Here is your value: " + data); 
+        document.getElementById("I-p1Trip").innerHTML = i_p1_trip_data;
+
+        if (i_p1_trip_data == true) {
+          //console.log("Running")
+          document.getElementById("p1_trip_status").innerHTML = "Tripped";
+        } else if (i_p1_trip_data == false) {
+          //console.log("Idle")
+          document.getElementById("p1_trip_status").innerHTML = "Healthy";
+        } else{
+          //console.log("Wrong data type")
+          document.getElementById("p1_trip_status").innerHTML = "Data Loss";
+        }
+
+      });
+
+
+      // Get DI_1 Count
+      const i_p2RunRef = ref(db, 'Telemetry Data/Digital Inputs/DI-2 : Pump No2 Run');
+      onValue(i_p2RunRef, (snapshot) => {
+        var i_p2_run_data = snapshot.val();
+        //console.log(data);
+        console.log(snapshot.val()); 
+        //alert("Here is your value: " + data); 
+        document.getElementById("I-p2Run").innerHTML = i_p2_run_data;
+
+        if (i_p2_run_data == true) {
+          //console.log("Running")
+          document.getElementById("p2_run_status").innerHTML = "Closed";
+        } else if (i_p2_run_data == false) {
+          //console.log("Idle")
+          document.getElementById("p2_run_status").innerHTML = "Opened";
+        } else{
+          //console.log("Wrong data type")
+          document.getElementById("p2_run_status").innerHTML = "Data Loss";
+        }
+
+      });
+
+      // Get DI_1 Count
+      const i_p2TripRef = ref(db, 'Telemetry Data/Digital Inputs/DI-3 : Pump No2 Trip');
+      onValue(i_p2TripRef, (snapshot) => {
+        var i_p2_trip_data = snapshot.val();
+        //console.log(data);
+        console.log(snapshot.val()); 
+        //alert("Here is your value: " + data); 
+        document.getElementById("I-p2Trip").innerHTML = i_p2_trip_data;
+
+        if (i_p2_trip_data == true) {
+          //console.log("Running")
+          document.getElementById("p2_trip_status").innerHTML = "Closed";
+        } else if (i_p2_trip_data == false) {
+          //console.log("Idle")
+          document.getElementById("p2_trip_status").innerHTML = "Opened";
+        } else{
+          //console.log("Wrong data type")
+          document.getElementById("p2_trip_status").innerHTML = "Data Loss";
+        }
+
+      });
+
+      // Get DI_1 Count
+      const pfrRef = ref(db, 'Telemetry Data/Digital Inputs/DI-4 : Phase Fail Relay (true = OK)');
+      onValue(pfrRef, (snapshot) => {
+        var pfrdata = snapshot.val();
+        //console.log(data);
+        console.log(snapshot.val()); 
+        //alert("Here is your value: " + data); 
+        document.getElementById("I-pfr").innerHTML = pfrdata;
+
+        if (pfrdata == true) {
+          //console.log("Running")
+          document.getElementById("pfr_status").innerHTML = "Healthy";
+        } else if (pfrdata == false) {
+          //console.log("Idle")
+          document.getElementById("pfr_status").innerHTML = "Fault";
+        } else{
+          //console.log("Wrong data type")
+          document.getElementById("pfr_status").innerHTML = "Data Loss";
+        }
+
+      });
+
+
+      // Get DI_1 Count
+      const p1SWRef = ref(db, 'Telemetry Data/Digital Inputs/DI-5 : Pump No1 Enabled');
+      onValue(p1SWRef, (snapshot) => {
+        var p1SWdata = snapshot.val();
+        //console.log(data);
+        console.log(snapshot.val()); 
+        //alert("Here is your value: " + data); 
+        document.getElementById("I-p1SW").innerHTML = p1SWdata;
+
+        if (p1SWdata == true) {
+          //console.log("Running")
+          document.getElementById("p1SW_state").innerHTML = "Enabled";
+        } else if (p1SWdata == false) {
+          //console.log("Idle")
+          document.getElementById("p1SW_state").innerHTML = "Disabled";
+        } else{
+          //console.log("Wrong data type")
+          document.getElementById("p1SW_state").innerHTML = "Data Loss";
+        }
+
+      });
+
+      // Get DI_1 Count
+      const p2SWRef = ref(db, 'Telemetry Data/Digital Inputs/DI-6 : Pump No2 Enabled');
+      onValue(p2SWRef, (snapshot) => {
+        var p2SWdata = snapshot.val();
+        //console.log(data);
+        console.log(snapshot.val()); 
+        //alert("Here is your value: " + data); 
+        document.getElementById("I-p2SW").innerHTML = p2SWdata;
+
+        if (p2SWdata == true) {
+          //console.log("Running")
+          document.getElementById("p2SW_state").innerHTML = "Closed";
+        } else if (p2SWdata == false) {
+          //console.log("Idle")
+          document.getElementById("p2SW_state").innerHTML = "Opened";
+        } else{
+          //console.log("Wrong data type")
+          document.getElementById("p2SW_state").innerHTML = "Data Loss";
+        }
+
+      });
+
+
+      // Get DI_1 Count
+      const floatRef = ref(db, 'Telemetry Data/Digital Inputs/DI-7 : External Flow Switch');
+      onValue(floatRef, (snapshot) => {
+        var floatdata = snapshot.val();
+        //console.log(data);
+        console.log(snapshot.val()); 
+        //alert("Here is your value: " + data); 
+        document.getElementById("I-float").innerHTML = floatdata;
+
+        if (floatdata == true) {
+          //console.log("Running")
+          document.getElementById("float_state").innerHTML = "Active";
+        } else if (floatdata == false) {
+          //console.log("Idle")
+          document.getElementById("float_state").innerHTML = "De-Active";
+        } else{
+          //console.log("Wrong data type")
+          document.getElementById("float_state").innerHTML = "Data Loss";
+        }
+
+      });
+
+      // Get RTU Count
+      const start1Ref = ref(db, 'Telemetry Data/Digital Outputs/DO-0 : Pump No1 Start');
+      onValue(start1Ref, (snapshot) => {
+        var start1_data = snapshot.val();
+        //console.log(data);
+        console.log(snapshot.val()); 
+        //alert("Here is your value: " + data); 
+        document.getElementById("start1").innerHTML = start1_data;
+
+      });
+
+      // Get DI_1 Count
+      const start2Ref = ref(db, 'Telemetry Data/Digital Outputs/DO-1 : Pump No1 Start');
+      onValue(start2Ref, (snapshot) => {
+        var start2_data = snapshot.val();
+        //console.log(data);
+        console.log(snapshot.val()); 
+        //alert("Here is your value: " + data); 
+        document.getElementById("start2").innerHTML = start2_data;
+      });
+
+      // Get DI_1 Count
+      const O_p1RunRef = ref(db, 'Telemetry Data/Digital Outputs/DO-2 : Pump No1 Run Lamp');
+      onValue(O_p1RunRef, (snapshot) => {
+        var O_p1Run_data = snapshot.val();
+        //console.log(data);
+        console.log(snapshot.val()); 
+        //alert("Here is your value: " + data); 
+        document.getElementById("O-p1Run").innerHTML = O_p1Run_data;
+      });
+
+
+      // Get DI_1 Count
+      const O_p1TripRef = ref(db, 'Telemetry Data/Digital Outputs/DO-3 : Pump No1 Trip Lamp');
+      onValue(O_p1TripRef, (snapshot) => {
+        var O_p1_trip_data = snapshot.val();
+        //console.log(data);
+        console.log(snapshot.val()); 
+        //alert("Here is your value: " + data); 
+        document.getElementById("O-p1Trip").innerHTML = O_p1_trip_data;
+      });
+
+       // Get DI_1 Count
+      const O_p2RunRef = ref(db, 'Telemetry Data/Digital Outputs/DO-4 : Pump No2 Run Lamp');
+      onValue(O_p2RunRef, (snapshot) => {
+        var O_p2Run_data = snapshot.val();
+        //console.log(data);
+        console.log(snapshot.val()); 
+        //alert("Here is your value: " + data); 
+        document.getElementById("O-p2Run").innerHTML = O_p2Run_data;
+
+      });
+
+
+      // Get DI_1 Count
+      const O_p2TripRef = ref(db, 'Telemetry Data/Digital Outputs/DO-5 : Pump No2 Trip Lamp');
+      onValue(O_p2TripRef, (snapshot) => {
+        var O_p2_trip_data = snapshot.val();
+        //console.log(data);
+        console.log(snapshot.val()); 
+        //alert("Here is your value: " + data); 
+        document.getElementById("O-p2Trip").innerHTML = O_p2_trip_data;
+      });
+
+      // Get DI_1 Count
+      const mainsRef = ref(db, 'Telemetry Data/Digital Outputs/DO-6 : Mains Healthy Lamp');
+      onValue(mainsRef, (snapshot) => {
+        var mainsdata = snapshot.val();
+        //console.log(data);
+        console.log(snapshot.val()); 
+        //alert("Here is your value: " + data); 
+        document.getElementById("O-Mains").innerHTML = mainsdata;
+      });
+
+
+      // Get DI_1 Count
+      const spareRef = ref(db, 'Telemetry Data/Digital Outputs/DO-7 : SPARE');
+      onValue(spareRef, (snapshot) => {
+        var sparedata = snapshot.val();
+        //console.log(data);
+        console.log(snapshot.val()); 
+        //alert("Here is your value: " + data); 
+        document.getElementById("O-Spare").innerHTML = sparedata;
+
+      });
+
+      // Get DI_1 Count
+      const pRef = ref(db, 'Telemetry Data/Analog Inputs/AI-0 : Pressure');
+      onValue(pRef, (snapshot) => {
+        var pdata = snapshot.val();
+        //console.log(data);
+        console.log(snapshot.val()); 
+        //alert("Here is your value: " + data); 
+        document.getElementById("AI-pressure").innerHTML = pdata;
+      });
+
+
+      // Get DI_1 Count
+      const lRef = ref(db, 'Telemetry Data/Analog Inputs/AI-1 : Sump Level');
+      onValue(lRef, (snapshot) => {
+        var ldata = snapshot.val();
+        //console.log(data);
+        console.log(snapshot.val()); 
+        //alert("Here is your value: " + data); 
+        document.getElementById("AI-level").innerHTML = ldata;
+      });
+
+      // Get DI_1 Count
+      const dRef = ref(db, 'Telemetry Data/Analog Inputs/AI-2 : Diesel Tank Level');
+      onValue(dRef, (snapshot) => {
+        var ddata = snapshot.val();
+        //console.log(data);
+        console.log(snapshot.val()); 
+        //alert("Here is your value: " + data); 
+        document.getElementById("AI-dlevel").innerHTML = ddata;
+      });
+
+
+      function msg() {
+        //alert("User Message!!\nThis button enables or disables the time control on the text outs. If enabled the door messages will be silenced between 9-6, Monday - Friday, if disabled sms's will be sent at all events. Text outs for trips and power failures will not be silenced");
+        var value = getData('Telemetry Data/Analog Inputs/AI-2 : Diesel Tank Level');
+        console.log(value);
+        alert(value);
+
+
+      }
+
+      function getData(refString){
+        const Ref = ref(db, refString);
+        onValue(Ref, (snapshot) => {
+          var data = snapshot.val();
+          console.log(data);
+          return data; 
+        });
+      }
+
+      var timeBtn = document.getElementById('timeBtn');
+      
+      
+      timeBtn.addEventListener('click', function() {
+
+          msg();
+      });
+
+      
+
+    </script>
+
+
+
+
+  </head>
+
+  
+
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="https://dev8418.d91z5dz532fj4.amplifyapp.com/" class="link"
+          >M&E Controls Ltd
+        </a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          <li class="nav__list-item">
+            <a class="link link--nav" href="#projects">overview</a>
+          </li>
+          <li class="nav__list-item">
+            <a class="link link--nav" href="#skills">Camera</a>
+          </li>
+          <li class="nav__list-item">
+            <a class="link link--nav" href="#contact">links</a>
+          </li>
+        </ul>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <!-- About -->
+      <div class="about center">
+
+        <h1><span class="about__name">Lough Anna</span></h1>
+        <h2 class="about__role">Web Telemetry</h2>
+        <p class="about__desc">
+          System developed to allow real-time monitoring of Lough Anna pumping station telemetry data. Allows users to quickly visualise communication status, IO states, process variables. Live stream of the on-site security camera available through the RING app. System is accompanied by a SMS alert system to highlight operational events & security events such as door opening events to the relevant users.
+        </p>
+
+        
+      </div>
+
+      <!-- Projects -->
+      <section id="projects" class="section projects">
+        <h2 class="section__title">Overview</h2>
+
+        <div class="projects__grid">
+
+          <div class="project">
+            <h3>Quick Glance </h3>
+            <p class="project__description">
+              Critical Process variables for quick inspection. 
+            </p>
+
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+            <p>Pump Status : <span id="p1_run_status"></span></p>
+            <p>Pump Switch : <span id="p1SW_state"></span></p>
+            <p>Pump Condition : <span id="p1_trip_status"></span></p>
+
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            
+
+            <p>Pump House Door : <span id="p2_run_status"></span></p>
+            <p>Generator House Door : <span id="p2SW_state"></span></p>
+            <p>Diesel Tank Door : <span id="p2_trip_status"></span></p>
+
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+            <p>Mains Supply : <span id="pfr_status"></span></p>
+            <p>Flow Switch : <span id="float_state"></span></p>
+
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+            <p>Line Pressure (Bar) : <span id="AI-pressure"></span></p>
+            <p>Pump Sump Level (Metre) : <span id="AI-level"></span></p>
+            <p>Diesel Tank Level (Metre) : <span id="AI-dlevel"></span></p>
+
+
+
+          </div>
+          <div class="project">
+            <h3>Comms RTU</h3>
+            <p class="project__description">
+              Heartbeat indictates communication in a healthy state.
+              If this value is frozen - Comms has been interupted.
+            </p>
+
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            
+            <ul class="project__stack">
+              <li class="project__stack-item">RTU Count</span></li>
+            </ul>
+            <p>Value :  <span id="RTU"></span>
+            </p>
+
+
+
+            
+
+          </div>
+      </section>
+
+      <!-- Projects -->
+      <section id="projects" class="section projects">
+        <h2 class="section__title">Kunbus Controller I/O Status</h2>
+
+        <div class="projects__grid">
+          <div class="project">
+            <h3>Digital Inputs</h3>
+            <p class="project__description">
+              Digital input states - 
+            </p>
+
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            
+
+            <p>DI-0 : Pump No.1 Run:  <span id="I-p1Run"></span>
+            </p>
+            <p>DI-1 : Pump No.1 Trip:  <span id="I-p1Trip"></span>
+            </p>
+             <p>DI-2 : Pump House Door:  <span id="I-p2Run"></span>
+            </p>
+            <p>DI-3 : Generator House Door:  <span id="I-p2Trip"></span>
+            </p>
+             <p>DI-4 : Phase Fail Relay:  <span id="I-pfr"></span>
+            </p>
+            <p>DI-5 : Pump No.1 Enabled:  <span id="I-p1SW"></span>
+            </p>
+             <p>DI-6 : Diesel House Door:  <span id="I-p2SW"></span>
+            </p>
+            <p>DI-7 : External Flow Switch:  <span id="I-float"></span>
+            </p>
+            
+          </div>
+
+          <div class="project">
+            <h3>Digital Outputs</h3>
+            <p class="project__description">
+              Digital output states - 
+            </p>
+
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            
+
+            <p>DO-0 : Pump No.1 Start Lamp:  <span id="start1"></span>
+            </p>
+            <p>DO-1 : Pump No.1 Start Lamp:  <span id="start2"></span>
+            </p>
+             <p>DO-2 : Pump No.1 Run Lamp:  <span id="O-p1Run"></span>
+            </p>
+            <p>DO-3 : Pump No.1 Trip Lamp:  <span id="O-p1Trip"></span>
+            </p>
+             <p>DO-4 : Pump No.2 Run Lamp:  <span id="O-p2Run"></span>
+            </p>
+            <p>DO-5 : Pump No.2 Trip Lamp:  <span id="O-p2Trip"></span>
+            </p>
+             <p>DO-6 : Mains Healthy Lamp:  <span id="O-Mains"></span>
+            </p>
+            <p>DO-7 : SPARE:  <span id="O-Spare"></span>
+            </p>
+
+            
+          </div>
+        </div>
+      </section>
+
+
+
+      <!-- Skills -->
+      <section class="section skills" id="skills">
+        <h2 class="section__title">IP Camera</h2>
+        <ul class="skills__list">
+          <li class="skills__list-item btn btn--plain">Live Camera Feed REVERT TO RING APP</li>
+        </ul>
+      </section>
+
+      <!-- Contact -->
+      <section class="section contact center" id="contact">
+        <h2 class="section__title">Links</h2>
+
+
+        <a href="mailto:info@maec.ie">
+          <span class="btn btn--outline">Email</span>
+        </a>
+
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+        <h2 class="section__title">SMS</h2>
+
+          <button id="timeBtn" class="btn btn--outline">SMS Time Control</button>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+          <p>SMS Alarm Number : +1 (920) 528-5256</p>
+
+
+        
+        <div class="about__contact center">
+          
+        </div>
+      </div>
+
+      </section>
+    </main>
+
+    <footer class="footer">
+      <a
+        href="https://www.linkedin.com/in/jonny-logue-3b3955158"
+        class="link footer__link"
+      >
+        Engineer : Jonathan Logue
+      </a>
+    </footer>
+
+    <div class="scroll-container">
+    <div class="scroll-top">
+      <a aria-label="Scroll up" href="#top">
+        <i aria-hidden="true" class="fas fa-arrow-up"></i>
+      </a>
+    </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
