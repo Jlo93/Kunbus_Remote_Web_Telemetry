@@ -23,21 +23,21 @@ from firebase import firebase
 
 
 # defining the firebase real time data base end point
-firebase = firebase.FirebaseApplication('https://glenties-source-data-default-rtdb.europe-west1.firebasedatabase.app/',None)
+firebase = firebase.FirebaseApplication('https://-------------------------------.firebasedatabase.app/',None)
 
 
 
 # defining the twillio account api credentials - review
-account_sid = 'AC4d6e0f48fcecb7a45dd67eefcd525ed8'
-auth_token = 'd1236098fc558b4de35a217607c5954c'
+account_sid = '-----------------------------------'
+auth_token = '------------------------------------'
 db = firebase.put('Telemetry Data/SMS Toggle/','Switch',1)
 
 p1_trip_msg = 0
 p2_trip_msg = 0
 boot_msg = 0
 
-contacts = ['+353861504523','+353862673250','+353871482958','+353851296626','+353868907923']
-admin_contact = ['+353868907923']
+contacts = ['insert phone numbers']
+admin_contact = ['admin number']
 
 
 
@@ -81,7 +81,7 @@ def boot_end1_sms(sid, token,contacts):
         client = Client(sid, token)
         message = client.messages.create(
 
-            messaging_service_sid='MG8ffabc04a0884594729a9aecbdf4ce4d',
+            messaging_service_sid='--------------------------------',
             body='Meenahalla Lake Pumps Alert System - Boot alert - System has been forced to reboot due to power outage or other circumstances. Details below.- Boot process has finalised Pump No.1 passed start up checks. Start Signal has been sent to VSD No.1.',
             to=contacts[i]
             )
@@ -96,7 +96,7 @@ def boot_end2_sms(sid, token,contacts):
         client = Client(sid, token)
         message = client.messages.create(
             
-            messaging_service_sid='MG8ffabc04a0884594729a9aecbdf4ce4d',
+            messaging_service_sid='--------------------------------',
             body='Meenahalla Lake Pumps Alert System - Boot alert - System has been forced to reboot due to power outage or other circumstances. Details below.- Boot process has finalised Pump No.2 passed start up checks. Start Signal has been sent to VSD No.2.',
             to=contacts[i]
             )
@@ -108,7 +108,7 @@ def boot_end3_sms(sid, token, contacts):
     for i in range(0,contactlen):
         client = Client(sid, token)
         message = client.messages.create(
-            messaging_service_sid='MG8ffabc04a0884594729a9aecbdf4ce4d',
+            messaging_service_sid='--------------------------------',
             body='Meenahalla Lake Pumps Alert System - Boot alert - System has been forced to reboot due to power outage or other circumstances. Details below.- Boot process has finalised No Pumps available at start up. Start Signal has NOT been sent to any VSD.',
             to=contacts[i]
             )
@@ -120,7 +120,7 @@ def phase_fail_sms(sid, token, contacts):
         client = Client(sid, token)
         message = client.messages.create(
             
-            messaging_service_sid='MG8ffabc04a0884594729a9aecbdf4ce4d',
+            messaging_service_sid='--------------------------------',
             body='Meenahalla Lake Pumps Alert System - Supply Interuption - Power Outage.',
             to=contacts[i]
         )
@@ -132,7 +132,7 @@ def p1_trip_sms(sid, token, contacts):
     for i in range(0,contactlen):
         client = Client(sid, token)
         message = client.messages.create(
-            messaging_service_sid='MG8ffabc04a0884594729a9aecbdf4ce4d',
+            messaging_service_sid='--------------------------------',
             body='Meenahalla Lake Pumps Alert System - Pump Tripped.',
             to=contacts[i]
             )
@@ -144,7 +144,7 @@ def p2_trip_sms(sid, token, contacts):
     for i in range(0,contactlen):
         client = Client(sid, token)
         message = client.messages.create(
-            messaging_service_sid='MG8ffabc04a0884594729a9aecbdf4ce4d',
+            messaging_service_sid=''--------------------------------',
             body='Meenahalla Lake Pumps Alert System - Pump No.2 Registered a Trip Signal.',
             to=contacts[i]
             )
@@ -173,7 +173,7 @@ def pHouse_sms(sid, token, contacts):
                 for i in range(0,contactlen):
                     client = Client(sid, token)
                     message = client.messages.create(
-                        messaging_service_sid='MG8ffabc04a0884594729a9aecbdf4ce4d',
+                        messaging_service_sid='--------------------------------',
                         body='Meenahalla Lake Pumps Alert System - Pump House Door Opened - Check Camera App.',
                         to=contacts[i]
                     )
@@ -185,7 +185,7 @@ def pHouse_sms(sid, token, contacts):
             for i in range(0,contactlen):
                 client = Client(sid, token)
                 message = client.messages.create(
-                messaging_service_sid='MG8ffabc04a0884594729a9aecbdf4ce4d',
+                messaging_service_sid='--------------------------------',
                 body='Meenahalla Lake Pumps Alert System - Pump House Door Opened - Check Camera App.',
                 to=contacts[i]
                 ) 
@@ -219,7 +219,7 @@ def genHouse_sms(sid, token, contacts):
                 for i in range(0,contactlen):
                     client = Client(sid, token)
                     message = client.messages.create(
-                    messaging_service_sid='MG8ffabc04a0884594729a9aecbdf4ce4d',
+                    messaging_service_sid='--------------------------------',
                     body='Meenahalla Lake Pumps Alert System - Generator Container Door Opened - Check Camera App.',
                     to=contacts[i]
                     )
@@ -231,7 +231,7 @@ def genHouse_sms(sid, token, contacts):
             for i in range(0,contactlen):
                 client = Client(sid, token)
                 message = client.messages.create(
-                messaging_service_sid='MG8ffabc04a0884594729a9aecbdf4ce4d',
+                messaging_service_sid='--------------------------------',
                 body='Meenahalla Lake Pumps Alert System - Generator Container Door Opened - Check Camera App.',
                 to=contacts[i]
                 )
@@ -267,7 +267,7 @@ def dHouse_sms(sid, token, contacts):
                 for i in range(0,contactlen):
                     client = Client(sid, token)
                     message = client.messages.create(
-                    messaging_service_sid='MG8ffabc04a0884594729a9aecbdf4ce4d',
+                    messaging_service_sid='--------------------------------',
                     body='Meenahalla Lake Pumps Alert System - Diesel Container Door Opened - Check Camera App.',
                     to=contacts[i]
                     )
@@ -278,7 +278,7 @@ def dHouse_sms(sid, token, contacts):
             for i in range(0,contactlen):
                 client = Client(sid, token)
                 message = client.messages.create(
-                messaging_service_sid='MG8ffabc04a0884594729a9aecbdf4ce4d',
+                messaging_service_sid='--------------------------------',
                 body='Meenahalla Lake Pumps Alert System - Diesel Container Door Opened - Check Camera App.',
                 to=contacts[i]
                 )
@@ -298,7 +298,7 @@ def sump_sms(sid, token, contacts):
     for i in range(0,contactlen):
         client = Client(sid, token)
         message = client.messages.create(
-            messaging_service_sid='MG8ffabc04a0884594729a9aecbdf4ce4d',
+            messaging_service_sid='--------------------------------',
             body='Meenahalla Lake Pumps Alert System - Pump Sump Level Low - Pumps Stopped.',
             to=contacts[i]
             )
@@ -310,17 +310,17 @@ def fuelLow_sms(sid, token, contacts):
     for i in range(0,contactlen):
         client = Client(sid, token)
         message = client.messages.create(
-            messaging_service_sid='MG8ffabc04a0884594729a9aecbdf4ce4d',
+            messaging_service_sid='--------------------------------',
             body='Meenahalla Lake Pumps Alert System - Diesel Tank Level Low - Refuel Required Soon',
             to=contacts[i]
             )             
 
 def emailFunc():
-    gmail_user = 'mandedevmail@gmail.com'
-    gmail_password = 'dinxplgwkogqsebn'
+    gmail_user = '--------------------------------'
+    gmail_password = '--------------------------------'
 
     sent_from = gmail_user
-    to = ['Jonnylogue93@gmail.com','michael@maec.ie','jonathon@maec.ie']
+    to = ['insert emails']
     subject = 'Meenahalla Pumping Station'
     body = '''This is a automated email sent through pyhton, triggered by a system reboot by the Kunbus Controller. No Action Required.'''
 
