@@ -1,9 +1,9 @@
 # Company: M & E Controls Ltd
 # Engineer: Jonathan Logue
-# Tested by: Michael Logue
+# Tested by: ------------
 # 
 # Date: 3/3/2022
-# Project: Meenahalla Lake Pumping station - Control & Monitoring System
+# Project: Lake Pumping station - Control & Monitoring System
 #
 # Code Description: # Program handles the main functionality of both the control logic for the pumps
 # as well as the data monitoring and alarming functionality. Code base also manages the controller
@@ -82,7 +82,7 @@ def boot_end1_sms(sid, token,contacts):
         message = client.messages.create(
 
             messaging_service_sid='--------------------------------',
-            body='Meenahalla Lake Pumps Alert System - Boot alert - System has been forced to reboot due to power outage or other circumstances. Details below.- Boot process has finalised Pump No.1 passed start up checks. Start Signal has been sent to VSD No.1.',
+            body= 'Lake Pumps Alert System - Boot alert - System has been forced to reboot due to power outage or other circumstances. Details below.- Boot process has finalised Pump No.1 passed start up checks. Start Signal has been sent to VSD No.1.',
             to=contacts[i]
             )
 
@@ -97,7 +97,7 @@ def boot_end2_sms(sid, token,contacts):
         message = client.messages.create(
             
             messaging_service_sid='--------------------------------',
-            body='Meenahalla Lake Pumps Alert System - Boot alert - System has been forced to reboot due to power outage or other circumstances. Details below.- Boot process has finalised Pump No.2 passed start up checks. Start Signal has been sent to VSD No.2.',
+            body='Lake Pumps Alert System - Boot alert - System has been forced to reboot due to power outage or other circumstances. Details below.- Boot process has finalised Pump No.2 passed start up checks. Start Signal has been sent to VSD No.2.',
             to=contacts[i]
             )
         
@@ -109,7 +109,7 @@ def boot_end3_sms(sid, token, contacts):
         client = Client(sid, token)
         message = client.messages.create(
             messaging_service_sid='--------------------------------',
-            body='Meenahalla Lake Pumps Alert System - Boot alert - System has been forced to reboot due to power outage or other circumstances. Details below.- Boot process has finalised No Pumps available at start up. Start Signal has NOT been sent to any VSD.',
+            body='Lake Pumps Alert System - Boot alert - System has been forced to reboot due to power outage or other circumstances. Details below.- Boot process has finalised No Pumps available at start up. Start Signal has NOT been sent to any VSD.',
             to=contacts[i]
             )
         
@@ -121,7 +121,7 @@ def phase_fail_sms(sid, token, contacts):
         message = client.messages.create(
             
             messaging_service_sid='--------------------------------',
-            body='Meenahalla Lake Pumps Alert System - Supply Interuption - Power Outage.',
+            body='Lake Pumps Alert System - Supply Interuption - Power Outage.',
             to=contacts[i]
         )
         
@@ -133,7 +133,7 @@ def p1_trip_sms(sid, token, contacts):
         client = Client(sid, token)
         message = client.messages.create(
             messaging_service_sid='--------------------------------',
-            body='Meenahalla Lake Pumps Alert System - Pump Tripped.',
+            body='Lake Pumps Alert System - Pump Tripped.',
             to=contacts[i]
             )
         
@@ -145,7 +145,7 @@ def p2_trip_sms(sid, token, contacts):
         client = Client(sid, token)
         message = client.messages.create(
             messaging_service_sid=''--------------------------------',
-            body='Meenahalla Lake Pumps Alert System - Pump No.2 Registered a Trip Signal.',
+            body='Lake Pumps Alert System - Pump No.2 Registered a Trip Signal.',
             to=contacts[i]
             )
 
@@ -174,7 +174,7 @@ def pHouse_sms(sid, token, contacts):
                     client = Client(sid, token)
                     message = client.messages.create(
                         messaging_service_sid='--------------------------------',
-                        body='Meenahalla Lake Pumps Alert System - Pump House Door Opened - Check Camera App.',
+                        body='Lake Pumps Alert System - Pump House Door Opened - Check Camera App.',
                         to=contacts[i]
                     )
             else:
@@ -186,7 +186,7 @@ def pHouse_sms(sid, token, contacts):
                 client = Client(sid, token)
                 message = client.messages.create(
                 messaging_service_sid='--------------------------------',
-                body='Meenahalla Lake Pumps Alert System - Pump House Door Opened - Check Camera App.',
+                body='Lake Pumps Alert System - Pump House Door Opened - Check Camera App.',
                 to=contacts[i]
                 ) 
     except:
@@ -220,7 +220,7 @@ def genHouse_sms(sid, token, contacts):
                     client = Client(sid, token)
                     message = client.messages.create(
                     messaging_service_sid='--------------------------------',
-                    body='Meenahalla Lake Pumps Alert System - Generator Container Door Opened - Check Camera App.',
+                    body='Lake Pumps Alert System - Generator Container Door Opened - Check Camera App.',
                     to=contacts[i]
                     )
             else:
@@ -232,7 +232,7 @@ def genHouse_sms(sid, token, contacts):
                 client = Client(sid, token)
                 message = client.messages.create(
                 messaging_service_sid='--------------------------------',
-                body='Meenahalla Lake Pumps Alert System - Generator Container Door Opened - Check Camera App.',
+                body='Lake Pumps Alert System - Generator Container Door Opened - Check Camera App.',
                 to=contacts[i]
                 )
     except:
@@ -268,7 +268,7 @@ def dHouse_sms(sid, token, contacts):
                     client = Client(sid, token)
                     message = client.messages.create(
                     messaging_service_sid='--------------------------------',
-                    body='Meenahalla Lake Pumps Alert System - Diesel Container Door Opened - Check Camera App.',
+                    body='Lake Pumps Alert System - Diesel Container Door Opened - Check Camera App.',
                     to=contacts[i]
                     )
             else:
@@ -279,7 +279,7 @@ def dHouse_sms(sid, token, contacts):
                 client = Client(sid, token)
                 message = client.messages.create(
                 messaging_service_sid='--------------------------------',
-                body='Meenahalla Lake Pumps Alert System - Diesel Container Door Opened - Check Camera App.',
+                body='Lake Pumps Alert System - Diesel Container Door Opened - Check Camera App.',
                 to=contacts[i]
                 )
     except:
@@ -299,7 +299,7 @@ def sump_sms(sid, token, contacts):
         client = Client(sid, token)
         message = client.messages.create(
             messaging_service_sid='--------------------------------',
-            body='Meenahalla Lake Pumps Alert System - Pump Sump Level Low - Pumps Stopped.',
+            body='Lake Pumps Alert System - Pump Sump Level Low - Pumps Stopped.',
             to=contacts[i]
             )
 
@@ -311,7 +311,7 @@ def fuelLow_sms(sid, token, contacts):
         client = Client(sid, token)
         message = client.messages.create(
             messaging_service_sid='--------------------------------',
-            body='Meenahalla Lake Pumps Alert System - Diesel Tank Level Low - Refuel Required Soon',
+            body='Lake Pumps Alert System - Diesel Tank Level Low - Refuel Required Soon',
             to=contacts[i]
             )             
 
@@ -321,7 +321,7 @@ def emailFunc():
 
     sent_from = gmail_user
     to = ['insert emails']
-    subject = 'Meenahalla Pumping Station'
+    subject = 'Pumping Station'
     body = '''This is a automated email sent through pyhton, triggered by a system reboot by the Kunbus Controller. No Action Required.'''
 
     email_text = """\
